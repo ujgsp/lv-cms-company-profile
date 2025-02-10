@@ -72,6 +72,7 @@ class HomeController extends Controller
         // Ambil data Site Info dari database
         $siteSettings = Option::where('option_name', 'setting_site_info')->first();
         $opt_site = json_decode($siteSettings->option_value, true);
+        // dd($opt_site);
 
         // cms setting
         $cmsSettings = Option::where('option_name', 'setting_section_cms')->first();

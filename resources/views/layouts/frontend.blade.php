@@ -154,16 +154,16 @@ FACEBOOK: https://www.facebook.com/themefisher
                     <div class="col-lg-4 col-md-4 top-social text-center text-md-right">
                         <ul class="list-unstyled">
                             <li>
-                                <a title="Facebook" href="{{ $opt_site->facebook }}">
+                                <a title="Facebook" href="{{ $site_info['facebook'] }}">
                                     <span class="social-icon"><i class="fab fa-facebook-f"></i></span>
                                 </a>
-                                <a title="Twitter" href="{{ $opt_site->twitter }}">
+                                <a title="Twitter" href="{{ $site_info['twitter'] }}">
                                     <span class="social-icon"><i class="fab fa-twitter"></i></span>
                                 </a>
-                                <a title="Instagram" href="{{ $opt_site->instagram }}">
+                                <a title="Instagram" href="{{ $site_info['instagram'] }}">
                                     <span class="social-icon"><i class="fab fa-instagram"></i></span>
                                 </a>
-                                <a title="Linkdin" href="{{ $opt_site->linkedin }}">
+                                <a title="Linkdin" href="{{ $site_info['linkedin'] }}">
                                     <span class="social-icon"><i class="fab fa-linkedin"></i></span>
                                 </a>
                             </li>

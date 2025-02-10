@@ -20,14 +20,14 @@
 
                     <div class="footer-social">
                         <ul>
-                            <li><a href="{{ $opt_site->facebook }}" aria-label="Facebook"><i
+                            <li><a href="{{ $site_info['facebook'] }}" aria-label="Facebook"><i
                                         class="fab fa-facebook-f"></i></a></li>
-                            <li><a href="{{ $opt_site->twitter }}" aria-label="Twitter"><i
+                            <li><a href="{{ $site_info['twitter'] }}" aria-label="Twitter"><i
                                         class="fab fa-twitter"></i></a>
                             </li>
-                            <li><a href="{{ $opt_site->instagram }}" aria-label="Instagram"><i
+                            <li><a href="{{ $site_info['instagram'] }}" aria-label="Instagram"><i
                                         class="fab fa-instagram"></i></a></li>
-                            <li><a href="{{ $opt_site->linkedin }}" aria-label="LinkedIn"><i
+                            <li><a href="{{ $site_info['linkedin'] }}" aria-label="LinkedIn"><i
                                         class="fab fa-linkedin"></i></a></li>
                         </ul>
                     </div><!-- Footer social end -->
