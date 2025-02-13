@@ -9,6 +9,9 @@
 @section('og_image', asset('storage/' . $seo_service['open_graph_image']))
 
 @section('content')
+    <!-- 
+    SLIDER
+    -->
     <div class="banner-carousel banner-carousel-1 mb-0">
         @foreach ($sliders as $slider)
             <div class="banner-carousel-item"
@@ -33,6 +36,9 @@
 
     </div>
 
+    <!-- 
+    CTA
+    -->
     <section class="call-to-action-box no-padding">
         <div class="container">
             <div class="action-style-box">
@@ -52,43 +58,52 @@
         </div><!-- Container end -->
     </section><!-- Action end -->
 
-    <section id="ts-features" class="ts-features pb-2">
+    <!-- 
+    ABOUT US
+    -->
+    <section id="ts-features" class="ts-features">
         <div class="container">
-            <div class="row text-center">
-                <div class="col-12">
-                    <h2 class="section-title">{{ $cms_setting['section_why_choose_us']['text_main'] }}</h2>
-                    <h3 class="section-sub-title">{{ $cms_setting['section_why_choose_us']['text_secondary'] }}</h3>
-                </div>
-            </div>
-
             <div class="row">
-                @foreach ($usps as $usp)
-                    <div class="col-lg-3 col-md-6 mb-3 mb-lg-5">
-                        <div class="ts-service-box">
+                <div class="col-lg-6 d-flex flex-column justify-content-center">
+                    <div class="ts-intro">
+                        <h2 class="into-title">About Us</h2>
+                        <h3 class="into-sub-title">{{ $opt_about_us['title'] }}</h3>
+                        <p>{{ $opt_about_us['short_description'] }}</p>
+                    </div><!-- Intro box end -->
 
-                            <div class="d-flex">
-                                <div class="ts-service-box-img">
-                                    @if ($usp->image)
-                                        <img loading="lazy" src="{{ asset('storage/' . $usp->image) }}"
-                                            alt="service-icon" />
-                                    @else
-                                        <img loading="lazy"
-                                            src="{{ asset('static/images/icon-image/placeholder_icon.png') }}"
-                                            alt="service-icon" />
-                                    @endif
+                    <div class="gap-20"></div>
+
+                    <div class="row">
+                        @foreach ($usps as $usp)
+                            <div class="col-md-6">
+                                <div class="ts-service-box d-flex align-items-center border p-3 rounded mb-3 shadow-sm">
+                                    <div class="ts-service-box-img me-3">
+                                        <img src="{{ asset('storage/' . $usp->image) }}" alt="{{ $usp->title }}"
+                                            class="img-fluid" width="50">
+                                    </div>
+                                    <div class="ts-service-box-content">
+                                        <h3 class="service-box-title mb-0">{{ $usp->title }}</h3>
+                                    </div>
                                 </div>
-                                <div class="ts-service-info">
-                                    <h3 class="service-box-title">{{ $usp->title }}</h3>
-                                    <p>{{ $usp->description }}</p>
-                                </div>
-                            </div>
-                        </div><!-- Service1 end -->
+                            </div><!-- Col end -->
+                        @endforeach
+                    </div><!-- Row end -->
+                </div><!-- Col end -->
+
+                <div class="col-lg-6 d-flex flex-column justify-content-center">
+                    <div class="our-values-image d-flex justify-content-center">
+                        <img loading="lazy" src="{{ asset('storage/' . $opt_about_us['thumbnail']) }}" alt="Our Values"
+                            class="img-fluid rounded">
                     </div>
-                @endforeach
-            </div><!-- Content row end -->
-        </div><!-- Container end -->
-    </section><!-- Feature are end -->
+                </div><!-- Col end -->
+            </div><!-- Row end -->
 
+        </div><!-- Container end -->
+    </section>
+
+    <!-- 
+    COUNTER
+    -->
     <section id="facts" class="facts-area dark-bg">
         <div class="container">
             <div class="facts-wrapper">
@@ -111,8 +126,10 @@
         <!--/ Container end -->
     </section><!-- Facts end -->
 
-    {{-- services --}}
-    <section id="ts-service-area" class="ts-service-area pb-0">
+    <!-- 
+    SERVICE
+    -->
+    <section id="ts-service-area" class="ts-service-area">
         <div class="container">
             <div class="row text-center">
                 <div class="col-12">
@@ -123,32 +140,9 @@
             <!--/ Title row end -->
 
             <div class="row">
-                <!-- Assuming you want to divide the services into two columns around the image -->
-                <div class="col-lg-6">
-                    @foreach ($services->slice(0, ceil($services->count() / 2)) as $service)
-                        <div class="ts-service-box d-flex">
-                            <div class="ts-service-box-img">
-                                @if ($service->image)
-                                    <img loading="lazy" src="{{ asset('storage/' . $service->image) }}"
-                                        alt="{{ $service->title }}" />
-                                @else
-                                    <img loading="lazy" src="{{ asset('static/images/icon-image/placeholder_icon.png') }}"
-                                        alt="service-icon" />
-                                @endif
-                            </div>
-                            <div class="ts-service-box-info">
-                                <h3 class="service-box-title"><a
-                                        href="{{ route('frontend.services.detail', $service) }}">{{ $service->title }}</a>
-                                </h3>
-                                <p>{{ $service->excerpt }}</p>
-                            </div>
-                        </div><!-- Service item end -->
-                    @endforeach
-                </div><!-- Col end -->
-
-                <div class="col-lg-6">
-                    @foreach ($services->slice(ceil($services->count() / 2)) as $service)
-                        <div class="ts-service-box d-flex mb-4">
+                @foreach ($services as $service)
+                    <div class="col-lg-6 mb-4">
+                        <div class="ts-service-box d-flex border p-4 rounded shadow-sm">
                             <div class="ts-service-box-img">
                                 <img loading="lazy" src="{{ asset('storage/' . $service->image) }}"
                                     alt="{{ $service->title }}" />
@@ -159,15 +153,17 @@
                                 </h3>
                                 <p>{{ $service->excerpt }}</p>
                             </div>
-                        </div><!-- Service item end -->
-                    @endforeach
-                </div><!-- Col end -->
+                        </div>
+                    </div>
+                @endforeach
             </div><!-- Content row end -->
 
         </div><!-- Container end -->
     </section><!-- Service end -->
 
-    {{-- portfolios --}}
+    <!-- 
+    PROJECT
+    -->
     <section id="main-container" class="main-container solid-bg">
         <div class="container">
             <div class="row text-center">
@@ -180,59 +176,65 @@
                 <div class="col-12">
                     <div class="shuffle-btn-group">
                         <label class="{{ !$current_category ? 'active' : '' }}" for="all">
-                            <input type="radio" name="shuffle-filter" id="all" value="all" checked="checked">Show All
+                            <input type="radio" name="shuffle-filter" id="all" value="all" checked="checked">Show
+                            All
                         </label>
-                        @foreach($project_categories as $category)
-                        <label for="{{ $category->slug }}">
-                            <input type="radio" name="shuffle-filter" id="{{ $category->slug }}"
-                                value="{{ $category->slug }}" {{ $current_category && $current_category->slug ==
-                            $category->slug ? 'checked' : '' }}>
-                            {{ $category->title }}
-                        </label>
+                        @foreach ($project_categories as $category)
+                            <label for="{{ $category->slug }}">
+                                <input type="radio" name="shuffle-filter" id="{{ $category->slug }}"
+                                    value="{{ $category->slug }}"
+                                    {{ $current_category && $current_category->slug == $category->slug ? 'checked' : '' }}>
+                                {{ $category->title }}
+                            </label>
                         @endforeach
                     </div><!-- project filter end -->
 
                     <div class="row shuffle-wrapper">
-                        @foreach($projects as $project)
-                        <div class="col-lg-4 col-md-6 shuffle-item"
-                            data-groups='["@foreach($project->categories as $category){{ $category->slug }}{{ !$loop->last ? '", "' : '' }}@endforeach"]'>
-                            <div class="project-img-container">
-                                <a class="gallery-popup" href="{{ asset('storage/'. $project->thumbnail) }}">
-                                    <img class="img-fluid" src="{{ asset('storage/'. $project->thumbnail) }}"
-                                        alt="project-image">
-                                    <span class="gallery-icon"><i class="fa fa-plus"></i></span>
-                                </a>
-                                <div class="project-item-info">
-                                    <div class="project-item-info-content">
-                                        <h3 class="project-item-title">
-                                            <a
-                                                href="{{ route('frontend.projects.single', ['project' => $project->slug]) }}">{{
-                                                $project->title }}</a>
-                                        </h3>
-                                        <p class="project-cat">
-                                            @foreach ($project->categories as $category)
-                                            {{ $category->title }}
-                                            @if (!$loop->last), @endif
-                                            @endforeach
-                                        </p>
+                        @foreach ($projects as $project)
+                            <div class="col-lg-4 col-md-6 shuffle-item"
+                                data-groups='["@foreach ($project->categories as $category){{ $category->slug }}{{ !$loop->last ? '", "' : '' }} @endforeach"]'>
+                                <div class="project-img-container">
+                                    <a class="gallery-popup" href="{{ asset('storage/' . $project->thumbnail) }}">
+                                        <img class="img-fluid" src="{{ asset('storage/' . $project->thumbnail) }}"
+                                            alt="project-image">
+                                        <span class="gallery-icon"><i class="fa fa-plus"></i></span>
+                                    </a>
+                                    <div class="project-item-info">
+                                        <div class="project-item-info-content">
+                                            <h3 class="project-item-title">
+                                                <a
+                                                    href="{{ route('frontend.projects.single', ['project' => $project->slug]) }}">{{ $project->title }}</a>
+                                            </h3>
+                                            <p class="project-cat">
+                                                @foreach ($project->categories as $category)
+                                                    {{ $category->title }}
+                                                    @if (!$loop->last)
+                                                        ,
+                                                    @endif
+                                                @endforeach
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
                         @endforeach
                     </div><!-- shuffle end -->
 
                 </div>
-
 
             </div><!-- Content row end -->
 
         </div><!-- Conatiner end -->
     </section><!-- Main container end -->
 
-    {{-- testimonial --}}
+    <!-- 
+    TESTIMONIAL
+    -->
     @include('layouts._frontend._partials.testimonials')
 
+    <!-- 
+    CTA
+    -->
     <section class="subscribe no-padding">
         <div class="container">
             <div class="row">
@@ -278,6 +280,9 @@
     </section>
     <!--/ subscribe end -->
 
+    <!-- 
+    BLOG
+    -->
     <section id="news" class="news">
         <div class="container">
             <div class="row text-center">
@@ -326,6 +331,9 @@
         <!--/ Container end -->
     </section>
 
+    <!-- 
+    ADS
+    -->
     @if (isset($opt_ads['ad_footer']) && $opt_ads['ad_footer']['ad_status'] == 'enable')
         {{-- Iklan di footer --}}
         <div class="container">

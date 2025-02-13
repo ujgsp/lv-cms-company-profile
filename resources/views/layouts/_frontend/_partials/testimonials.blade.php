@@ -15,11 +15,13 @@
 
                                 <div class="quote-item-footer">
                                     @if ($testimonial->image)
-                                    <img loading="lazy" class="testimonial-thumb"
-                                    src="{{ asset('storage/'. $testimonial->image) }}" alt="{{ $testimonial->name }}">
+                                        <img loading="lazy" class="testimonial-thumb"
+                                            src="{{ asset('storage/' . $testimonial->image) }}"
+                                            alt="{{ $testimonial->name }}">
                                     @else
-                                    <img loading="lazy" class="testimonial-thumb"
-                                        src="{{ asset('static/images/team/default_user_2_optimize.png') }}" alt="testimonial">
+                                        <img loading="lazy" class="testimonial-thumb"
+                                            src="{{ asset('static/images/team/default_user_2_optimize.png') }}"
+                                            alt="testimonial">
                                     @endif
                                     <div class="quote-item-info">
                                         <h3 class="quote-author">{{ $testimonial->name }}</h3>
@@ -45,16 +47,10 @@
                     @foreach ($partners as $partner)
                         <div class="col-sm-4 col-6">
                             <figure class="clients-logo">
-                                <a target="_blank" href="{{ $partner->website }}">
-                                    @if ($partner->image)
-                                        <img loading="lazy" class="img-fluid"
-                                            src="{{ asset('storage/' . $partner->image) }}"
-                                            alt="{{ $partner->title }}" />
-                                    @else
-                                        <img loading="lazy" class="img-fluid"
-                                            src="{{ asset('static/images/clients/client1.png') }}"
-                                            alt="clients-logo" />
-                                    @endif
+                                <a target="_blank" href="{{ $partner->website ?? '#' }}">
+                                    <img loading="lazy" class="img-fluid"
+                                        src="{{ asset('storage/' . $partner->image) }}"
+                                        alt="{{ $partner->title ?? 'Client Logo' }}" />
                                 </a>
                             </figure>
                         </div><!-- Client 1 end -->

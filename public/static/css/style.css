@@ -1801,8 +1801,7 @@ ul.navbar-nav>li.header-get-a-quote:hover>a:after {
 }
 
 .ts-service-box .ts-service-box-content {
-    margin-left: 62px;
-    margin-bottom: 30px;
+    margin-left: 20px;
 }
 
 .tab-content .ts-service-box .ts-service-box-content {
@@ -1817,7 +1816,7 @@ ul.navbar-nav>li.header-get-a-quote:hover>a:after {
 
 .ts-service-box .ts-service-box-info {
     margin-left: 25px;
-    margin-bottom: 40px;
+    /* margin-bottom: 40px; */
 }
 
 .service-box-title {

@@ -158,7 +158,7 @@
 
         <div class="sidebar-brand">
             <div class="product-info d-flex justify-space-between">
-                <span class="badge">{{ env('APP_NAME') }}</span>
+                <span class="badge">Konstruxio</span>
                 <span class="badge text-success">1.1.1</span>
             </div>
         </div>

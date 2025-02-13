@@ -7,11 +7,11 @@
                     <h3 class="widget-title">About Us</h3>
 
                     @if ($opt_site->logo)
-                    <img loading="lazy" width="200px" class="footer-logo"
-                        src="{{ asset('storage/' . $opt_site->logo_footer) }}" alt="Constra">
+                        <img loading="lazy" width="200px" class="footer-logo"
+                            src="{{ asset('storage/' . $opt_site->logo_footer) }}" alt="Constra">
                     @else
-                    <img loading="lazy" width="200px" class="footer-logo"
-                        src="{{ asset('static/images/footer-logo.png') }}" alt="Constra">
+                        <img loading="lazy" width="200px" class="footer-logo"
+                            src="{{ asset('static/images/footer-logo.png') }}" alt="Constra">
                     @endif
 
                     <p>
@@ -20,47 +20,49 @@
 
                     <div class="footer-social">
                         <ul>
-                            <li><a href="{{ $site_info['facebook'] }}" aria-label="Facebook"><i
+                            <li><a href="{{ $opt_site->facebook }}" aria-label="Facebook"><i
                                         class="fab fa-facebook-f"></i></a></li>
-                            <li><a href="{{ $site_info['twitter'] }}" aria-label="Twitter"><i
+                            <li><a href="{{ $opt_site->twitter }}" aria-label="Twitter"><i
                                         class="fab fa-twitter"></i></a>
                             </li>
-                            <li><a href="{{ $site_info['instagram'] }}" aria-label="Instagram"><i
+                            <li><a href="{{ $opt_site->instagram }}" aria-label="Instagram"><i
                                         class="fab fa-instagram"></i></a></li>
-                            <li><a href="{{ $site_info['linkedin'] }}" aria-label="LinkedIn"><i
+                            <li><a href="{{ $opt_site->linkedin }}" aria-label="LinkedIn"><i
                                         class="fab fa-linkedin"></i></a></li>
                         </ul>
                     </div><!-- Footer social end -->
                 </div><!-- Col end -->
 
                 @if ($opt_contact->enable_office_hours == 'enable')
-                <div class="col-lg-4 col-md-6 footer-widget mt-5 mt-md-0">
-                    <h3 class="widget-title">Working Hours</h3>
-                    <div class="working-hours">
-                        <p class="mt-2">
-                            {{ $opt_contact->office_hours }}
-                        </p>
-                    </div>
-                </div><!-- Col end -->
+                    <div class="col-lg-4 col-md-6 footer-widget mt-5 mt-md-0">
+                        <h3 class="widget-title">Working Hours</h3>
+                        <div class="working-hours">
+                            <p class="mt-2">
+                                {{ $opt_contact->office_hours }}
+                            </p>
+                        </div>
+                    </div><!-- Col end -->
                 @endif
 
                 @if (count($pages_footer) || count($external_link_footers))
-                <div class="col-lg-3 col-md-6 mt-5 mt-lg-0 footer-widget">
-                    <h3 class="widget-title">Useful Links</h3>
-                    <ul class="list-arrow">
-                        @foreach ($pages_footer as $page)
-                        <li>
-                            <a href="{{ route('frontend.page', ['page' => $page->slug]) }}">{{ $page->title }}</a>
-                        </li>
-                        @endforeach
+                    <div class="col-lg-3 col-md-6 mt-5 mt-lg-0 footer-widget">
+                        <h3 class="widget-title">Useful Links</h3>
+                        <ul class="list-arrow">
+                            @foreach ($pages_footer as $page)
+                                <li>
+                                    <a
+                                        href="{{ route('frontend.page', ['page' => $page->slug]) }}">{{ $page->title }}</a>
+                                </li>
+                            @endforeach
 
-                        @foreach ($external_link_footers as $link)
-                        <li>
-                            <a href="{{ $link->location }}" {{ $link->new_tab == true ? 'target="_blank"' : '' }}>{{ $link->title }}</a>
-                        </li>
-                        @endforeach
-                    </ul>
-                </div><!-- Col end -->
+                            @foreach ($external_link_footers as $link)
+                                <li>
+                                    <a href="{{ $link->location }}"
+                                        {{ $link->new_tab == true ? 'target="_blank"' : '' }}>{{ $link->title }}</a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div><!-- Col end -->
                 @endif
 
             </div><!-- Row end -->
