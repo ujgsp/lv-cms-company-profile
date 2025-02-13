@@ -201,7 +201,7 @@ Route::group([
 
 Route::group([
     'prefix' => 'dashboard',
-    'middleware' => ['web', 'auth']
+    'middleware' => ['web', 'auth', 'demo']
 ], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
 

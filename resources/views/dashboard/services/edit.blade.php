@@ -9,6 +9,13 @@
 @endsection
 
 @section('content')
+    
+@if (session('error'))
+        <div class="mt-3 alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+
     <div class="mt-3 card">
         <div class="card-body">
             <form method="POST" action="{{ route('services.update', ['service' => $service->slug]) }}"
@@ -75,8 +82,9 @@
                         <div id="showImage"></div>
                     @endif
 
-                    <input class="form-control @error('thumbnail') is-invalid @enderror" type="file" id="thumbnail"  onchange="previewFileAdd(this, 'showImage')"
-                        name="thumbnail" accept="image/png, image/gif, image/jpeg" />
+                    <input class="form-control @error('thumbnail') is-invalid @enderror" type="file" id="thumbnail"
+                        onchange="previewFileAdd(this, 'showImage')" name="thumbnail"
+                        accept="image/png, image/gif, image/jpeg" />
 
                     <small class="mt-2 text-muted d-block">Allowed File Types: PNG, JPG, JPEG Only</small>
 

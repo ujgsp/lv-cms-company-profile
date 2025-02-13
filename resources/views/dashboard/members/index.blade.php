@@ -16,6 +16,12 @@ List of all Members on your website.
 </div>
 @endif
 
+@if(session('error'))
+    <div class="mt-3 alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
+
 @if ($errors->any())
 <div class="mt-3 alert alert-danger alert-dismissible" role="alert">
     <div class="alert-message">
