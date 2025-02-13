@@ -16,6 +16,12 @@ List of all Pages on your website.
 </div>
 @endif
 
+@if(session('error'))
+    <div class="mt-3 alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
+
 @if ($errors->any())
 <div class="row mt-3">
     <div class="col-md-12">

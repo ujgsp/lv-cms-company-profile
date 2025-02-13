@@ -9,6 +9,11 @@
 @endsection
 
 @section('content')
+    @if (session('error'))
+        <div class="mt-3 alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
     <div class="mt-3 card">
         <div class="card-body">
             <form method="POST" action="{{ route('counters.update', $counter) }}">
@@ -18,8 +23,7 @@
                     <div class="form-group">
                         <label class="form-label" for="title">Title <span class="text-danger">*</span></label>
                         <input class="form-control @error('title') is-invalid @enderror" type="text" name="title"
-                            id="title"
-                            placeholder="Enter text" value="{{ old('title', $counter->title) }}">
+                            id="title" placeholder="Enter text" value="{{ old('title', $counter->title) }}">
 
                         @error('title')
                             <span class="invalid-feedback" role="alert">
@@ -33,8 +37,7 @@
                     <div class="form-group">
                         <label class="form-label" for="value">Value <span class="text-danger">*</span></label>
                         <input class="form-control @error('value') is-invalid @enderror" type="text" name="value"
-                            id="value"
-                            placeholder="Enter number" value="{{ old('value', $counter->value) }}">
+                            id="value" placeholder="Enter number" value="{{ old('value', $counter->value) }}">
 
                         @error('value')
                             <span class="invalid-feedback" role="alert">
@@ -52,4 +55,3 @@
         </div>
     </div>
 @endsection
-

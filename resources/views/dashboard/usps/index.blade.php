@@ -5,7 +5,7 @@
 @endsection
 
 @section('description')
-    List of all Why Choose Us  on your website.
+    List of all Why Choose Us on your website.
 @endsection
 
 @section('content')
@@ -13,6 +13,12 @@
         <div class="mt-3 alert alert-success alert-dismissible fade show" role="alert">
             {{ session('success') }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+
+    @if (session('error'))
+        <div class="mt-3 alert alert-danger">
+            {{ session('error') }}
         </div>
     @endif
 
@@ -65,14 +71,14 @@
                                             alt="{{ $usp->title }}">
                                     @else
                                         <img src="{{ asset('static/images/icon-image/placeholder_icon.png') }}"
-                                            class="p-2 img-fluid rounded"
-                                            alt="{{ $usp->title }}">
+                                            class="p-2 img-fluid rounded" alt="{{ $usp->title }}">
                                     @endif
                                 </div>
                                 <div class="ms-3">
                                     <div><strong>{{ Str::limit($usp->title, 100) }}</strong></div>
                                     {{-- <small class="text-muted">{{ Str::limit($usp->description, 100) }}</small> --}}
-                                    <div class="text-muted d-none d-xxl-table-cell text-break text-wrap text-truncate" style="max-width: 42.5rem;">
+                                    <div class="text-muted d-none d-xxl-table-cell text-break text-wrap text-truncate"
+                                        style="max-width: 42.5rem;">
                                         {{ $usp->description }}
                                     </div>
                                 </div>
@@ -85,8 +91,7 @@
                             <a href="{{ route('usps.edit', $usp) }}" class="btn btn-sm btn-primary">
                                 <i class="align-middle" data-feather="edit-2"></i>
                                 <span class="align-middle"> Edit</a>
-                            <form action="{{ route('usps.destroy', $usp) }}" method="post"
-                                class="d-inline">
+                            <form action="{{ route('usps.destroy', $usp) }}" method="post" class="d-inline">
                                 @method('delete')
                                 @csrf
                                 <button title="Delete" class="btn btn-sm btn-danger"
@@ -102,7 +107,6 @@
                     </tr>
                 @endforelse
 
-
             </tbody>
         </table>
     </div>
@@ -114,33 +118,33 @@
 @push('css')
     <style>
         .thumbnail-wrapper {
-        flex-shrink: 0;
-        width: 80px;
-        /* Adjust width as needed */
-        height: auto;
-    }
+            flex-shrink: 0;
+            width: 80px;
+            /* Adjust width as needed */
+            height: auto;
+        }
 
-    .thumbnail-wrapper img {
-        width: 100%;
-        height: 3.25rem;
-        object-fit: cover;
-    }
+        .thumbnail-wrapper img {
+            width: 100%;
+            height: 3.25rem;
+            object-fit: cover;
+        }
 
-    .table td {
-        vertical-align: middle;
-    }
+        .table td {
+            vertical-align: middle;
+        }
 
-    .table .d-flex .text-muted {
-        font-size: 0.80rem;
-    }
+        .table .d-flex .text-muted {
+            font-size: 0.80rem;
+        }
 
-    .d-flex.align-items-center .ms-3 {
-        max-width: calc(100% - 80px);
-    }
+        .d-flex.align-items-center .ms-3 {
+            max-width: calc(100% - 80px);
+        }
 
-    .table-responsive {
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-    }
+        .table-responsive {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
     </style>
 @endpush

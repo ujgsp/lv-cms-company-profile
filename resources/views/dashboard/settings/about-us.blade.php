@@ -5,7 +5,7 @@
 @endsection
 
 @section('description')
-Configure About Your Website.
+    Configure About Your Website.
 @endsection
 
 @section('content')
@@ -13,6 +13,12 @@ Configure About Your Website.
         <div class="mt-3 alert alert-success alert-dismissible fade show" role="alert">
             {{ session('success') }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+
+    @if (session('error'))
+        <div class="mt-3 alert alert-danger">
+            {{ session('error') }}
         </div>
     @endif
 
@@ -52,7 +58,6 @@ Configure About Your Website.
                     <label for="thumbnail" class="form-label">Thumbnail <span class="text-danger">*</span></label>
                     <label class="form-label">(Best resolution width - 1600 px, height - Any px)</label>
 
-
                     <div class="image-preview">
                         @if ($opt_about_us->thumbnail)
                             <img src="{{ asset('storage/' . $opt_about_us->thumbnail) }}" alt="" id="previewImage">
@@ -63,9 +68,9 @@ Configure About Your Website.
 
                     </div>
 
-
                     <input class="form-control @error('thumbnail') is-invalid @enderror" type="file" id="thumbnail"
-                        name="thumbnail" autocomplete="off" accept="image/png, image/gif, image/jpeg" onchange="previewFile(this, 'previewImage');">
+                        name="thumbnail" autocomplete="off" accept="image/png, image/gif, image/jpeg"
+                        onchange="previewFile(this, 'previewImage');">
 
                     @error('thumbnail')
                         <span class="invalid-feedback" role="alert">
@@ -92,9 +97,11 @@ Configure About Your Website.
 
                 <div class="mb-3">
                     <div class="form-group">
-                        <label class="form-label" for="short_description">Short Description <span class="text-danger">*</span></label>
+                        <label class="form-label" for="short_description">Short Description <span
+                                class="text-danger">*</span></label>
 
-                        <textarea rows="2" class="form-control @error('short_description') is-invalid @enderror" id="short_description" name="short_description">{{ old('short_description', $opt_about_us->short_description) }}</textarea>
+                        <textarea rows="2" class="form-control @error('short_description') is-invalid @enderror" id="short_description"
+                            name="short_description">{{ old('short_description', $opt_about_us->short_description) }}</textarea>
 
                         <small class="mt-2 text-muted d-block">A brief description of your website</small>
 
@@ -105,7 +112,6 @@ Configure About Your Website.
                         @enderror
                     </div>
                 </div>
-
 
                 <div class="">
                     <button type="submit" class="btn btn-primary btn-lg">Update</button>

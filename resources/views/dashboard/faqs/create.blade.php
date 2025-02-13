@@ -9,6 +9,12 @@
 @endsection
 
 @section('content')
+    @if (session('error'))
+        <div class="mt-3 alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+
     <div class="mt-3 card">
         <div class="card-body">
             <form method="POST" action="{{ route('faqs.store') }}">
@@ -17,8 +23,7 @@
                     <div class="form-group">
                         <label class="form-label" for="title">Title <span class="text-danger">*</span></label>
                         <input class="form-control @error('title') is-invalid @enderror" type="text" name="title"
-                            id="title"
-                            placeholder="Enter title" value="{{ old('title') }}">
+                            id="title" placeholder="Enter title" value="{{ old('title') }}">
 
                         @error('title')
                             <span class="invalid-feedback" role="alert">
@@ -56,7 +61,7 @@
                             <select class="form-select @error('category_id') is-invalid @enderror" name="category_id"
                                 id="category_id" aria-label="Select category">
                                 @foreach ($categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->title }}</option>
+                                    <option value="{{ $category->id }}">{{ $category->title }}</option>
                                 @endforeach
                             </select>
                             <button title="Add New Category" type="button" class="btn btn-primary" data-bs-toggle="modal"
@@ -66,9 +71,9 @@
                         </div>
 
                         @error('category_id')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                         @enderror
                     </div>
                 </div>
@@ -76,8 +81,7 @@
                 <div class="mb-3">
                     <div class="form-group">
                         <label class="form-label" for="description">Description <span class="text-danger">*</span></label>
-                        <textarea id="body" name="description"
-                            class="form-control @error('description') is-invalid @enderror">{!! old('description') !!}</textarea>
+                        <textarea id="body" name="description" class="form-control @error('description') is-invalid @enderror">{!! old('description') !!}</textarea>
                         <small class="mt-2 text-muted d-block">Use the Editor to compose your page, or you may use
                             HTML.</small>
 
@@ -97,36 +101,36 @@
         </div>
     </div>
     <!-- Modal for adding category -->
-<div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addCategoryModalLabel">Add New Category</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <span id="validationErrors"></span>
-                <!-- Form to add new category -->
-                <form id="addCategoryForm" action="{{ route('categories.store') }}" method="POST">
-                    @csrf
-                    <div class="mb-3">
-                        <label for="titleCategory" class="form-label">Title  <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="titleCategory" name="titleCategory">
+    <div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addCategoryModalLabel">Add New Category</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <span id="validationErrors"></span>
+                    <!-- Form to add new category -->
+                    <form id="addCategoryForm" action="{{ route('categories.store') }}" method="POST">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="titleCategory" class="form-label">Title <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="titleCategory" name="titleCategory">
 
-                    </div>
-                    <div class="mb-3">
-                        <label for="slugCategory" class="form-label">Slug  <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="slugCategory" name="slugCategory">
-                        <span id="slug-error-category" class="text-danger"></span>
-                        <input type="hidden" name="typeCategory" value="faq">
-                    </div>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary float-end">Save changes</button>
-                </form>
+                        </div>
+                        <div class="mb-3">
+                            <label for="slugCategory" class="form-label">Slug <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="slugCategory" name="slugCategory">
+                            <span id="slug-error-category" class="text-danger"></span>
+                            <input type="hidden" name="typeCategory" value="faq">
+                        </div>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary float-end">Save changes</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 @endsection
 
 @push('css')
@@ -247,7 +251,8 @@
                             var errors = xhr.responseJSON.errors;
                             var errorMessages = Object.values(errors).flat().join('<br>');
                             // Display error messages to the user
-                            $('#validationErrors').html('<div class="alert alert-danger">' + errorMessages + '</div>');
+                            $('#validationErrors').html('<div class="alert alert-danger">' +
+                                errorMessages + '</div>');
                         } else {
                             console.error(xhr.responseText);
                         }
@@ -264,7 +269,8 @@
 
                     // Add the updated options
                     $.each(data, function(index, category) {
-                        $('#category_id').append('<option value="' + category.id + '">' + category.title + '</option>');
+                        $('#category_id').append('<option value="' + category.id + '">' + category
+                            .title + '</option>');
                     });
                 });
             }

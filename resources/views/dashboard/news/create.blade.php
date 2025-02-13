@@ -9,6 +9,13 @@ Create a News for your Website
 @endsection
 
 @section('content')
+
+@if(session('error'))
+    <div class="mt-3 alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
+
 <div class="mt-3 card">
     <div class="card-body">
         <form method="POST" action="{{ route('news.store') }}" enctype="multipart/form-data">

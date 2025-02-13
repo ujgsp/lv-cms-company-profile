@@ -9,6 +9,12 @@
 @endsection
 
 @section('content')
+    @if (session('error'))
+        <div class="mt-3 alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+
     <div class="mt-3 card">
         <div class="card-body">
             <form method="POST" action="{{ route('faqs.update', $faq) }}">
@@ -18,8 +24,7 @@
                     <div class="form-group">
                         <label class="form-label" for="title">Title <span class="text-danger">*</span></label>
                         <input class="form-control @error('title') is-invalid @enderror" type="text" name="title"
-                            id="title"
-                            placeholder="Enter title" value="{{ old('title', $faq->title) }}">
+                            id="title" placeholder="Enter title" value="{{ old('title', $faq->title) }}">
 
                         @error('title')
                             <span class="invalid-feedback" role="alert">
@@ -36,9 +41,10 @@
                             id="category_id">
                             <option value="" disabled>Choose..</option>
                             @foreach ($categories as $category)
-                            <option value="{{ $category->id }}"
-                                {{ (old('category_id', $faq->category_id) == $category->id) ? 'selected' : '' }}>{{ $category->title }}
-                            </option>
+                                <option value="{{ $category->id }}"
+                                    {{ old('category_id', $faq->category_id) == $category->id ? 'selected' : '' }}>
+                                    {{ $category->title }}
+                                </option>
                             @endforeach
                         </select>
 
@@ -53,8 +59,7 @@
                 <div class="mb-3">
                     <div class="form-group">
                         <label class="form-label" for="description">Description <span class="text-danger">*</span></label>
-                        <textarea id="body" name="description"
-                            class="form-control @error('description') is-invalid @enderror">{!! old('description', $faq->body) !!}</textarea>
+                        <textarea id="body" name="description" class="form-control @error('description') is-invalid @enderror">{!! old('description', $faq->body) !!}</textarea>
                         <small class="mt-2 text-muted d-block">Use the Editor to compose your page, or you may use
                             HTML.</small>
 
@@ -70,7 +75,8 @@
                     <div class="form-group">
                         <label class="form-label" for="status">Page Status</label>
                         <div class="form-check form-switch form-switch-md float-end">
-                            <input id="publish" class="form-check-input" {{ $faq->status === 'enable' ? 'checked=""' : '' }} value="enable" name="status"
+                            <input id="publish" class="form-check-input"
+                                {{ $faq->status === 'enable' ? 'checked=""' : '' }} value="enable" name="status"
                                 type="checkbox">
                         </div>
                         <small class="text-muted d-block">Whether to Enable or Disable this page.</small>
